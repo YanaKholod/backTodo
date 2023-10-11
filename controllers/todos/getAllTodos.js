@@ -1,15 +1,15 @@
 const Todo = require("../../models/Todo");
 
 const getAllTodos = async (req, res) => {
-  //   const { sort } = req.body;
+  const { id } = req.user;
 
   const page = parseInt(req.query.page) || 1;
   const perPage = parseInt(req.query.perPage) || 10;
 
-  const totalTodos = await Todo.countDocuments({});
+  const totalTodos = await Todo.countDocuments({ owner: id });
   const totalPages = Math.ceil(totalTodos / perPage);
 
-  let query = Todo.find({})
+  let query = Todo.find({ owner: id })
     .skip((page - 1) * perPage)
     .limit(perPage);
 

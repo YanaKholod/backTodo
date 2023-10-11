@@ -7,7 +7,7 @@ const register = async (req, res, next) => {
   const user = await User.findOne({ email });
 
   if (user) {
-    throw new HttpError(409, "Phone number in use");
+    throw new HttpError(409, "Email in use");
   }
   const hashPassword = await bcrypt.hash(password, 10); // хешируем пароль
   await User.create({
