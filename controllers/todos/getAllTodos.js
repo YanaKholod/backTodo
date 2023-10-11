@@ -13,15 +13,15 @@ const getAllTodos = async (req, res) => {
     .skip((page - 1) * perPage)
     .limit(perPage);
 
-  const sortBy = req.query.sortBy || "title";
-  const sortOrder = req.query.sortOrder || "asc";
+  // const sortBy = req.query.sortBy || "title";
+  // const sortOrder = req.query.sortOrder || "asc";
 
-  if (sortBy === "title") {
-    const sortDirection = sortOrder === "asc" ? 1 : -1;
-    query = query
-      .collation({ locale: "en", strength: 1 })
-      .sort({ companyName: sortDirection });
-  }
+  // if (sortBy === "title") {
+  //   const sortDirection = sortOrder === "asc" ? 1 : -1;
+  //   query = query
+  //     .collation({ locale: "en", strength: 1 })
+  //     .sort({ companyName: sortDirection });
+  // }
 
   const todos = await query.exec();
 
