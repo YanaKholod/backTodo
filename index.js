@@ -1,8 +1,8 @@
 const express = require("express");
 const logger = require("morgan");
 const cors = require("cors");
-const authRoute = require("./routes/todo/auth-routing");
-const todoRoute = require("./routes/todo/todo-routing");
+const authRoute = require("./routes/api/auth-routing");
+const todoRoute = require("./routes/api/todo-routing");
 require("dotenv").config(); // доступ к переменнім окружения из енв в переменніх окружения на сервере или локально
 
 const app = express();
@@ -13,8 +13,8 @@ app.use(logger(formatsLogger)); // определяем терминал шор�
 app.use(cors()); // разрешаем всем доступ
 app.use(express.json()); // допускает взодящие данніе в формате джсон и делает его доступнім в реквест бади
 
-app.use("/todo/auth", authRoute); // подключаем роут к серверу
-app.use("/todo/todos", todoRoute);
+app.use("/api/auth", authRoute); // подключаем роут к серверу
+app.use("/api/todos", todoRoute);
 
 app.use((req, res) => {
   res.status(404).json({ message: "Not found " }); // обрабатывает ошибки на несуществующие маршруты
