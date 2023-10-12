@@ -3,10 +3,12 @@ const Todo = require("../../models/Todo");
 
 const editTodo = async (req, res) => {
   const { id } = req.params;
+  console.log(req.body);
+  const {parentTodo} = req.body;
   const updateInfo = req.body;
 
   if (updateInfo.parentTodo) {
-    const parentTodo = await Todo.findById(updateInfo.parentTodo);
+    const parentTodo = await Todo.findById(parentTodo);
 
     if (!parentTodo) {
       throw new HttpError(404, "Parent Todo not found");
