@@ -1,6 +1,7 @@
 const Todo = require("../../models/Todo");
 
 const getAllTodos = async (req, res) => {
+  console.log(req.user);
   if (!req.user) {
     // Handle the case where the user is not authenticated
     return res.status(401).json({ message: "User is not authenticated." });
