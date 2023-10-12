@@ -3,8 +3,7 @@ const Todo = require("../../models/Todo");
 
 const editTodo = async (req, res) => {
   const { id } = req.params;
-  console.log(req.body);
-  const {parentTodo} = req.body;
+  const {parentTodo} = req.params;
   const updateInfo = req.body;
 
   if (updateInfo.parentTodo) {
