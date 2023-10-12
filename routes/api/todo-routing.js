@@ -5,7 +5,7 @@ const { controllWrapper } = require("../../helpers");
 
 const router = express.Router();
 
-router.get("/all", authenticate, todoController.getAllTodos);
+router.get("/all", todoController.getAllTodos);
 
 router.post("/", authenticate, controllWrapper(todoController.addTodo));
 
