@@ -3,15 +3,20 @@ const Todo = require("../../models/Todo");
 const getAllTodos = async (req, res) => {
   const { id } = req.user;
 
-  const page = parseInt(req.query.page) || 1;
-  const perPage = parseInt(req.query.perPage) || 10;
+  const todos = await Todo.find({ owner: id });
+  res.json({
+    todos,
+  });
+};
+  // const page = parseInt(req.query.page) || 1;
+  // const perPage = parseInt(req.query.perPage) || 10;
 
-  const totalTodos = await Todo.countDocuments({ owner: id });
-  const totalPages = Math.ceil(totalTodos / perPage);
+  // const totalTodos = await Todo.countDocuments({ owner: id });
+  // const totalPages = Math.ceil(totalTodos / perPage);
 
-  let query = Todo.find({ owner: id })
-    .skip((page - 1) * perPage)
-    .limit(perPage);
+  // let query = Todo.find({ owner: id })
+  //   .skip((page - 1) * perPage)
+  //   .limit(perPage);
 
   // const sortBy = req.query.sortBy || "title";
   // const sortOrder = req.query.sortOrder || "asc";
@@ -23,13 +28,13 @@ const getAllTodos = async (req, res) => {
   //     .sort({ companyName: sortDirection });
   // }
 
-  const todos = await query.exec();
+//   const todos = await query.exec();
 
-  res.json({
-    todos,
-    totalPages,
-    currentPage: page,
-  });
-};
+//   res.json({
+//     todos,
+//     totalPages,
+//     currentPage: page,
+//   });
+// };
 
 module.exports = getAllTodos;
