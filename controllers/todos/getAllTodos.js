@@ -1,17 +1,25 @@
 const Todo = require("../../models/Todo");
 
 const getAllTodos = async (req, res) => {
-  console.log(req.user);
-  if (!req.user) {
-    // Handle the case where the user is not authenticated
-    return res.status(401).json({ message: "User is not authenticated." });
-  }
-
   const { id } = req.user;
 
+   const page = parseInt(req.query.page) || 1;
+  const limit = parseInt(req.query.limit) || 10;
+  const sortOrder = req.query.sort === 'asc' ? 1 : -1; 
+
+  const options = {
+    skip: (page - 1) * limit,
+    limit,
+    sort: { isCompleted: sortOrder }, 
+  };
+   const totalTodos = await Todo.countDocuments({ owner: id });
+    const todos = await Todo.find({ owner: id }, null, options);
+  
   const todos = await Todo.find({ owner: id });
   res.json({
     todos,
+    totalPages: Math.ceil(totalTodos / limit),
+      currentPage: page,
   });
 };
   // const page = parseInt(req.query.page) || 1;
