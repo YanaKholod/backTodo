@@ -13,7 +13,13 @@ const editTodo = async (req, res) => {
       throw new HttpError(404, "Parent Todo not found");
     }
 
-    parentTodo.subTodo.push(updateInfo);
+     const subTask = {
+      title: updateInfo.title,
+      description:updateInfo.description,
+      isCompleted:updateInfo.isCompleted,
+    };
+
+    parentTodo.subTodo.push(subTask);
 
     const result = await parentTodo.save();
 
