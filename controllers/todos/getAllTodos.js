@@ -1,6 +1,11 @@
 const Todo = require("../../models/Todo");
 
 const getAllTodos = async (req, res) => {
+  if (!req.user) {
+    // Handle the case where the user is not authenticated
+    return res.status(401).json({ message: "User is not authenticated." });
+  }
+
   const { id } = req.user;
 
   const todos = await Todo.find({ owner: id });
