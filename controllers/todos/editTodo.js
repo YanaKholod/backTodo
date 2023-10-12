@@ -5,7 +5,6 @@ const editTodo = async (req, res) => {
   const { id } = req.params;
   const updateInfo = req.body;
   
- const updateInfo = req.body;
 
   if (updateInfo.parentTodo) {
     // It's an update for a sub-todo
