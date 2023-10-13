@@ -2,7 +2,7 @@ const { HttpError } = require("../helpers");
 const jwt = require("jsonwebtoken");
 const User = require("../models/User");
 require("dotenv").config();
-const { SECRET_KEY } = process.env;
+const { SECRET_KEY } = process.env; // проверяет наличие токена и если он есть создает руквест юзер
 
 const authenticate = async (req, res, next) => {
   const { authorization = "" } = req.headers;
