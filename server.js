@@ -15,10 +15,11 @@ mongoose
     const wss = new WebSocket.Server({ server });
 
     wss.on("connection", (ws) => {
-      console.log("A client connected to the WebSocket");
+      console.log("A client connected to the WebSocket"); // подключился клиент
 
       ws.on("message", (message) => {
         wss.clients.forEach((client) => {
+          // проверяет не является ли клиент отправителем чтобы показать остальным сообщение
           if (client !== ws && client.readyState === WebSocket.OPEN) {
             client.send(message);
           }
@@ -26,6 +27,7 @@ mongoose
       });
 
       ws.on("close", () => {
+        // отключение от подключения
         console.log("A client disconnected from the WebSocket");
       });
     });
@@ -34,6 +36,7 @@ mongoose
       console.error("WebSocket error:", error);
     });
     process.on("SIGINT", () => {
+      // при прерывании соединения отключает соединение
       server.close(() => {
         console.log("Server and WebSocket closed.");
         process.exit(0);
