@@ -10,7 +10,18 @@ const app = express();
 const formatsLogger = app.get("env") === "development" ? "dev" : "short"; // дев дает расширенній терминал
 
 app.use(logger(formatsLogger)); // определяем терминал шорт или дев в зависимости от запущенного скрипта
-app.use(cors()); // разрешаем всем доступ
+
+app.use(
+  // разрешаем всем доступ
+  cors({
+    origin: "*",
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    preflightContinue: false,
+    optionsSuccessStatus: 204,
+    allowedHeaders: "Content-Type, Authorization",
+  })
+);
+
 app.use(express.json()); // допускает взодящие данніе в формате джсон и делает его доступнім в реквест бади
 
 app.use("/api/auth", authRoute); // подключаем роут к серверу

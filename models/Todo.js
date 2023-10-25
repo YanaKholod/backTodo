@@ -18,6 +18,12 @@ const todoSchema = new Schema(
         isCompleted: { type: Boolean, default: false },
       },
     ],
+    steps: [
+      {
+        title: { type: String, default: "" },
+        isCompleted: { type: Boolean, default: false },
+      },
+    ],
   },
   { versionKey: false, timestamps: true }
 );
