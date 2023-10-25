@@ -22,7 +22,6 @@ const todoSchema = new Schema(
     steps: [
       {
         title: { type: String, default: "" },
-        isCompleted: { type: Boolean, default: false },
       },
     ],
   },
