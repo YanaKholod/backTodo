@@ -11,6 +11,7 @@ const todoSchema = new Schema(
       minlength: 5,
     },
     isCompleted: { type: Boolean, default: false },
+    isArchived: { type: Boolean, default: false },
     subTodo: [
       {
         title: { type: String, default: "" },
